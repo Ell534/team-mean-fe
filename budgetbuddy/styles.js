@@ -1,16 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexWrap: 'wrap',
-    backgroundColor: '#fb6c09',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   title: {
     fontSize: 20,
-    backgroundColor: '#d3c139',
+    backgroundColor: '#e56d25',
   },
   login: {
     backgroundColor: '#3192d0',
@@ -20,6 +13,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#b1bd4b',
     alignItems: 'center',
   },
+  text: {
+    color: '#fff'
+  }
 });
 
 export { styles };
