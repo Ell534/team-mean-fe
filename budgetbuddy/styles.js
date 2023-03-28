@@ -1,20 +1,26 @@
+// #00FFA6 light shades, #E2B44E light accent, #7B75AF main brand colour, #A74494 dark accent, #292E64 dark shades
+
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   title: {
     fontSize: 20,
-    backgroundColor: '#e56d25',
   },
   login: {
-    backgroundColor: '#3192d0',
+    backgroundColor: '#292E64',
     alignItems: 'center',
   },
   newUser: {
-    backgroundColor: '#b1bd4b',
+    backgroundColor: '#292E64',
     alignItems: 'center',
   },
   text: {
-    color: '#fff'
+    color: '#F7B626',
+    fontSize: 40,
+    fontWeight: 'bold',
+  },
+  placeholderText: {
+    color: '#F7B626',
   }
 });
 

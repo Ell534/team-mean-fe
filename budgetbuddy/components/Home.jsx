@@ -11,22 +11,23 @@ const Login = ({ navigation }) => {
     password: '',
   });
 
-
   return (
     <SafeAreaView style={styles.login}>
       <Header />
       <TextInput
         placeholder="username"
+        placeholderTextColor="#e2b44e"
         onChangeText={onChangeUsername}
         text={userName}
-        style={styles.text}
+        style={styles.placeholderText}
       />
       <TextInput
         placeholder="password"
+        placeholderTextColor="#e2b44e"
         onChangeText={onChangePassword}
         text={password}
         secureTextEntry={true}
-        style={styles.text}
+        style={styles.placeholderText}
       />
       <Button
         title="Login"

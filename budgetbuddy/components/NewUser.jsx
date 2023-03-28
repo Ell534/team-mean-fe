@@ -33,38 +33,43 @@ const NewUser = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.newUser}>
       <TextInput
-        style={styles.text}
+        style={styles.placeholderText}
         placeholder="Enter your name"
+        placeholderTextColor='#e2b44e'
         required
         text={name}
         onChangeText={onChangeName}
       />
       <TextInput
-        style={styles.text}
+        style={styles.placeholderText}
         placeholder="Enter your username"
+        placeholderTextColor='#e2b44e'
         required
         text={username}
         onChangeText={onChangeUsername}
       />
       <TextInput
-        style={styles.text}
+        style={styles.placeholderText}
         placeholder="Enter your email"
+        placeholderTextColor='#e2b44e'
         inputMode="email"
         required
         text={email}
         onChangeText={onChangeEmail}
       />
       <TextInput
-        style={styles.text}
+        style={styles.placeholderText}
         placeholder="Enter a password"
+        placeholderTextColor='#e2b44e'
         secureTextEntry={true}
         required
         text={password}
         onChangeText={onChangePassword}
       />
       <TextInput
-        style={styles.text}
+        style={styles.placeholderText}
         placeholder="Re-enter the password"
+        placeholderTextColor='#e2b44e'
         secureTextEntry={true}
         required
         text={passwordConfirm}
