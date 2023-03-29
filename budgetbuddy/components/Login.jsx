@@ -2,24 +2,27 @@ import { Button, Text, TextInput, View, SafeAreaView } from 'react-native';
 import { styles } from '../styles';
 import Header from './Header';
 import { useState } from 'react';
+import { auth } from '../firebaseConfig';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
-const Login = ({ navigation, setIsLoggedIn }) => {
-  const [userName, onChangeUsername] = useState('username');
+const Login = ({ navigation, setIsLoggedIn, setUser }) => {
+  const [email, onChangeEmail] = useState('email');
   const [password, onChangePassword] = useState('password');
   const [loginDetails, setLoginDetails] = useState({
     username: '',
     password: '',
   });
 
+  const auth = getAuth();
 
   return (
     <SafeAreaView style={styles.login}>
       <Header />
       <TextInput
-        placeholder="username"
+        placeholder="email"
         placeholderTextColor="#e2b44e"
-        onChangeText={onChangeUsername}
-        text={userName}
+        onChangeText={onChangeEmail}
+        text={email}
         style={styles.placeholderText}
       />
       <TextInput
@@ -33,10 +36,34 @@ const Login = ({ navigation, setIsLoggedIn }) => {
       <Button
         title="Login"
         onPress={() => {
-          setLoginDetails(
-            { ...loginDetails, username: userName, password: password }
-            //post request using loginDetails as the request body
-          );
+          // setLoginDetails(
+          //   { ...loginDetails, username: userName, password: password }
+          //   //post request using loginDetails as the request body
+          // );
+          signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              // Signed in
+              const user = userCredential.user;
+              console.log(user);
+              setUser(user);
+              setIsLoggedIn(true);
+              console.log(user.uid, 'uid', user.getToken(), 'token');
+              // ...
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              console.log(
+                email,
+                'email',
+                password,
+                'password',
+                errorCode,
+                '<--error code',
+                errorMessage,
+                '<--message'
+              );
+            });
         }}
       />
       <Button
