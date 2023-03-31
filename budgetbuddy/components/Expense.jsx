@@ -88,6 +88,7 @@ const Expense = ({navigation}) => {
             }} title='Dismiss'/>
         </SafeAreaView>
     )
+    
 }
 
 export default Expense
