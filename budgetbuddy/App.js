@@ -9,12 +9,48 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useState } from "react";
 import Expense from "./components/Expense";
 import Income from "./components/Income";
+import { useEffect } from "react";
+import {
+  checkIfRegistered,
+  checkIfRegisteredBudget,
+  postRegisteredBudget,
+} from "./utils/api";
+
+import RegisterUserData from "./components/RegisterUserData";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [isRegisteredBudget, setIsRegisteredBudget] = useState(false);
+
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      checkIfRegistered(user.uid).then((userData) => {
+        if (userData) {
+          setIsRegistered(true);
+        }
+      });
+      if (!isRegisteredBudget) {
+        checkIfRegisteredBudget(user.uid).then((userData) => {
+          if (userData) {
+            setIsRegisteredBudget(true);
+          } else {
+            postRegisteredBudget(user.uid, {
+              income_t_count: 0,
+              expense_t_count: 0,
+              balance: 0,
+              total_income: 0,
+              total_expenses: 0,
+            });
+          }
+        });
+      }
+    }
+  }, [isLoggedIn]);
 
   // console.log(user.uid, '<--user id', user.getToken(), '<-- user token');
 
@@ -29,6 +65,14 @@ export default function App() {
         <Stack.Group>
           {isLoggedIn ? (
             <>
+              {isRegistered ? (
+                <></>
+              ) : (
+                <Stack.Screen name="RegisterUserData">
+                  {(props) => <RegisterUserData {...props} user={user} />}
+                </Stack.Screen>
+              )}
+
               <Stack.Screen name="Home" component={Home} />
               <Stack.Screen name="Personal" component={Personal} />
               <Stack.Screen name="Group" component={Group} />
