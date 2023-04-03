@@ -22,7 +22,7 @@ const Personal = ({ navigation }) => {
         title="Spending Stats"
       />
       <Button onPress={() => {
-        navigation.navigate('Goals');
+        navigation.navigate('Personal Goals');
       }}
       title="Set & View Goals" />
       <Button onPress={() => {
