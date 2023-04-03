@@ -1,4 +1,4 @@
-import { Text, Button, SafeAreaView, TextInput } from "react-native"
+import { Button, SafeAreaView, TextInput } from "react-native"
 import { useState } from "react"
 import { styles } from "../styles";
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -6,26 +6,46 @@ import DropDownPicker from 'react-native-dropdown-picker';
 const Expense = ({navigation}) => {
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState(null)
+    const [currencyOpen, setCurrencyOpen] = useState(false)
+    const [currencyValue, setCurrencyValue] = useState(null)
+    const [categoryId, setCategory] = useState(0);
+    const [description, onChangeDescription] = useState('');
     const [amount, onChangeAmount] = useState(0);
-    const [date, onChangeDate] = useState('');
-    const [location, onChangeLocation] = useState('');
-    const [business, onChangeBusiness] = useState('');
-    const [category, setCategory] = useState('');
-    const [notes, onChangeNotes] = useState('');
+    const [currency_id, setCurrency] = useState(0)
+    const [currencies, setCurrencies] = useState([
+        {label: 'GBP', value: 1},
+        {label: 'USD', value: 2},
+        {label: 'EUR', value: 3}
+    ])
     const [categories, setCategories] = useState([
-        {label: 'Food', value: 'Food'},
-        {label: 'Social', value: 'Social Life'},
-        {label: 'Transportation', value: 'Transportation'},
-        {label: 'Household', value: 'Household'}
+        {label: 'Groceries', value: 4},
+        {label: 'Restaurants', value: 5},
+        {label: 'Entertainment', value: 8},
+        {label: 'Studying', value: 10},
+        {label: 'Petrol',Value: 13},
+        {label: 'Public Transport',Value: 14},
+        {label: 'Rent',Value: 16},
+        {label: 'Urilities',Value: 17},
+        {label: 'Holiday',Value: 21},
+        {label: 'Clothing',Value: 22}
     ]);
     const [expenseDetails, setExpenseDetails] = useState({
+        userId: 0,
+        budgetId: 0,
+        categoryId: 0,
+        type: 'expense',
+        description: '',
         amount: 0,
-        date: '',
-        location: '',
-        business: '',
-        category: '',
-        notes: '',
+        date: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        currency_id: 0,
     })
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        addExpense(expenseDetails)
+    }
 
     return (
         <SafeAreaView>
@@ -37,27 +57,13 @@ const Expense = ({navigation}) => {
             style={styles.placeholderText}
             />
             <TextInput 
-            placeholder="date"
+            placeholder="description"
             placeholderTextColor='#e2b44e'
-            onChangeText={onChangeDate}
-            text={date}
+            onChangeText={onChangeDescription}
+            text={description}
             style={styles.placeholderText}
             />
-            <TextInput 
-            placeholder="location"
-            placeholderTextColor='#e2b44e'
-            onChangeText={onChangeLocation}
-            text={location}
-            style={styles.placeholderText}
-            />
-            <TextInput 
-            placeholder="business"
-            placeholderTextColor='#e2b44e'
-            onChangeText={onChangeBusiness}
-            text={business}
-            style={styles.placeholderText}
-            />
-            <DropDownPicker 
+            <DropDownPicker
             open={open}
             value={value}
             items={categories}
@@ -68,19 +74,24 @@ const Expense = ({navigation}) => {
                 setCategory(value)
             }}
             />
-            <TextInput 
-            placeholder="notes"
-            placeholderTextColor='#e2b44e'
-            onChangeText={onChangeNotes}
-            text={notes}
-            style={styles.placeholderText}
+            <DropDownPicker 
+            open={currencyOpen}
+            value={currencyValue}
+            items={currencies}
+            setOpen={setCurrencyOpen}
+            setValue={setCurrencyValue}
+            setItem={setCurrencies}
+            onChangeValue={(value) => {
+                setCurrency(value)
+            }}
             />
             <Button 
             title='Add Expense'
             onPress={() => {
                 setExpenseDetails(
-                    {...expenseDetails, amount, date, location, business, category, notes}
+                    {...expenseDetails, amount, date, categoryId, description, currency_id}
                 )
+                handleSubmit
             }}
             />
             <Button onPress={() => {
