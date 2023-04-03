@@ -1,15 +1,17 @@
+
 import { StatusBar } from "expo-status-bar";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useState } from "react";
+import { useEffect } from "react";
 import Login from "./components/Login";
 import NewUser from "./components/NewUser";
 import Home from "./components/Home";
 import Personal from "./components/Personal";
 import Group from "./components/Group";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useState } from "react";
+import PersonalGoals from './components/PersonalGoals';
 import Expense from "./components/Expense";
 import Income from "./components/Income";
-import { useEffect } from "react";
 import {
   checkIfRegistered,
   checkIfRegisteredBudget,
@@ -58,8 +60,8 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerStyle: { backgroundColor: "#00ffa6" },
-          headerTintColor: "#292e64",
+          headerStyle: { backgroundColor: '#00ffa6' },
+          headerTintColor: '#292e64',
         }}
       >
         <Stack.Group>
@@ -76,6 +78,7 @@ export default function App() {
               <Stack.Screen name="Home" component={Home} />
               <Stack.Screen name="Personal" component={Personal} />
               <Stack.Screen name="Group" component={Group} />
+              <Stack.Screen name="Personal Goals" component={PersonalGoals} />
             </>
           ) : (
             <>
@@ -93,7 +96,7 @@ export default function App() {
           )}
         </Stack.Group>
 
-        <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen name="Expense" component={Expense} />
           <Stack.Screen name="Income" component={Income} />
         </Stack.Group>
