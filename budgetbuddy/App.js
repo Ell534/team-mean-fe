@@ -10,7 +10,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import Expense from './components/Expense';
 import Income from './components/Income';
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {

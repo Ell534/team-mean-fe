@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   placeholderText: {
     color: '#F7B626',
-  }
+  },
 });
 
 export { styles };
