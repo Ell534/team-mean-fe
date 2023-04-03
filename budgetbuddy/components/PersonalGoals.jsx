@@ -1,6 +1,7 @@
 import { Text, SafeAreaView, FlatList } from 'react-native';
 import { getUserGoals } from '../utils';
 import { useState, useEffect } from 'react';
+import { styles } from '../styles';
 
 const PersonalGoals = () => {
   const [userGoals, setUserGoals] = useState([]);
@@ -12,16 +13,18 @@ const PersonalGoals = () => {
   }, []);
 
   return (
-    <SafeAreaView>
-      <Text>Money Goals!</Text>
+    <SafeAreaView style={styles.login}>
+      <Text style={styles.titleText}>Money Goals!</Text>
       <FlatList
         data={userGoals}
         renderItem={(item) => {
-          console.log(Object.keys(item.item));
+          const targetDate = new Date(item.item.target_date).toLocaleDateString(
+            'en-GB'
+          );
           // console.log(item.index);
           return (
             <SafeAreaView>
-              <Text>
+              <Text style={styles.goalsText}>
                 {`
                 Goal Number: ${item.index + 1}
                 Balance: £${item.item.balance}, 
@@ -29,7 +32,7 @@ const PersonalGoals = () => {
                 Deposit Frequency: ${item.item.deposit_frequency},
                 Reason: ${item.item.reason}
                 Target Amount: £${item.item.target_amount}
-                Target Date: ${item.item.target_date}
+                Target Date: ${targetDate}
                 `}
               </Text>
             </SafeAreaView>
