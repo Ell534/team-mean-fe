@@ -1,19 +1,19 @@
-import { Button, SafeAreaView, TextInput } from "react-native";
-import DropDownPicker from "react-native-dropdown-picker";
-import { postRegisteredUser } from "../utils/api";
-import { useState } from "react";
-import { styles } from "../styles";
+import { Button, SafeAreaView, TextInput } from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
+import { postRegisteredUser } from '../utils/api';
+import { useState } from 'react';
+import { styles } from '../styles';
 
 const RegisterUserData = ({ user, navigation }) => {
-  const [name, onChangeName] = useState("");
-  const [userName, onChangeUserName] = useState("");
-  const [currency, setCurrency] = useState("");
+  const [name, onChangeName] = useState('');
+  const [userName, onChangeUserName] = useState('');
+  const [currency, setCurrency] = useState('');
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [currencies, setCurrencies] = useState([
-    { label: "Mexican Peso", value: "mexicanPeso" },
-    { label: "Saudi Riyal", value: "saudiRiyal" },
-    { label: "GBP", value: "gbp" },
+    { label: 'Mexican Peso', value: 'mexicanPeso' },
+    { label: 'Saudi Riyal', value: 'saudiRiyal' },
+    { label: 'GBP', value: 'gbp' },
   ]);
 
   return (
@@ -33,6 +33,9 @@ const RegisterUserData = ({ user, navigation }) => {
         style={styles.placeholderText}
       />
       <DropDownPicker
+        containerProps={{
+          height: open === true ? 220 : null,
+        }}
         open={open}
         value={value}
         items={currencies}
@@ -51,7 +54,7 @@ const RegisterUserData = ({ user, navigation }) => {
             name,
             userName,
             currency,
-          }).then(navigation.navigate("Home"));
+          }).then(navigation.navigate('Home'));
         }}
       />
     </SafeAreaView>

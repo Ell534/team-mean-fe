@@ -1,5 +1,5 @@
 import { Text, SafeAreaView, FlatList } from 'react-native';
-import { getUserGoals } from '../utils';
+import { getUserGoals } from '../utils/api';
 import { useState, useEffect } from 'react';
 import { styles } from '../styles';
 
