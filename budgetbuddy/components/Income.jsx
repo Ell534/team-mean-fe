@@ -1,4 +1,4 @@
-import { Button, SafeAreaView, TextInput } from "react-native"
+import { Button, SafeAreaView, TextInput, Text } from "react-native"
 import { useState } from "react"
 import { styles } from "../styles"
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -43,7 +43,7 @@ const Income = ({navigation, user}) => {
 
     if (message) {
         return (<SafeAreaView style={styles.login}>
-            <Text style={styles.text}>Your expense has been added!</Text>
+            <Text style={styles.text}>Your income has been added!</Text>
             <Button onPress={() => {
                 navigation.goBack()
             }} title='Dismiss'/>
@@ -58,6 +58,7 @@ const Income = ({navigation, user}) => {
             onChangeText={onChangeAmount}
             text={amount}
             style={styles.placeholderText}
+            inputMode='numeric'
             />
             <TextInput 
             placeholder="description"
@@ -97,7 +98,7 @@ const Income = ({navigation, user}) => {
             <Button 
             title='Add Income'
             onPress={() => {
-                addTransaction(amount, categoryId,description, currency_id, user.uid)
+                addTransaction(type, amount, categoryId,description, currency_id, user.uid)
                 .then((data) => {
                     setMessage(true)
                 })

@@ -67,6 +67,7 @@ const Expense = ({navigation, user}) => {
             onChangeText={onChangeAmount}
             text={amount}
             style={styles.placeholderText}
+            inputMode='numeric'
             />
             <TextInput 
             placeholder="description"
