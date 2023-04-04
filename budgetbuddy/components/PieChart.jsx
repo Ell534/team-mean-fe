@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Pressable } from "react-native";
 import { VictoryPie } from "victory-native";
 
 const PieChart = ({ budgetData, chartData }) => {
@@ -48,16 +48,20 @@ const PieChart = ({ budgetData, chartData }) => {
     <View style={styles.container}>
       <VictoryPie
         data={getPieChartData()}
-        colorScale="qualitative"
-        labelRadius={({ innerRadius }) => innerRadius + 15}
+        colorScale={["#7F5A83","#95C623","#EC20D8", "#FC6C16", "#8B939C", "#FF0035", "#78BC61", "#F0F00F", "#066e24", "#E55812"]}
+        labelRadius={({ innerRadius }) => innerRadius + 6 }
+        labelPosition={ "centroid"}
+        labelPlacement={"parallel"}
         radius={150}
-        innerRadius={70}
+        innerRadius={60}
+        padAngle={1}
         style={{
           labels: {
             fill: "white",
-            fontSize: 14,
+            fontSize: 17,
             fontWeight: "bold",
-            padding: 50,
+            // padding: 50,
+            backgroundColor: '#080043',
           },
         }}
         // height={280}
@@ -81,15 +85,20 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    marginTop: 10,
+    marginTop: 20,
+
   },
-  button: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    marginHorizontal: 5,
-    backgroundColor: "#cccccc",
-    borderRadius: 5,
-  },
+  // button: {
+  //   paddingHorizontal: 10,
+  //   paddingVertical: 5,
+  //   marginHorizontal: 5,
+  //   backgroundColor: '#080043',
+  //   borderRadius: 5,
+  // },
 });
 
 export default PieChart;
+
+// const styles = StyleSheet.create({
+
+// })
