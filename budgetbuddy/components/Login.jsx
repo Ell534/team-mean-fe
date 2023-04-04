@@ -1,13 +1,18 @@
-import { Button, Text, TextInput, View, SafeAreaView } from "react-native";
-import { styles } from "../styles";
+import {
+  Button,
+  Text,
+  TextInput,
+  StyleSheet,
+  SafeAreaView,
+} from "react-native";
 import Header from "./Header";
 import { useState } from "react";
 import { auth } from "../firebaseConfig";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = ({ navigation, setIsLoggedIn, setUser }) => {
-  const [email, onChangeEmail] = useState('');
-  const [password, onChangePassword] = useState('');
+  const [email, onChangeEmail] = useState("");
+  const [password, onChangePassword] = useState("");
   const [loginDetails, setLoginDetails] = useState({
     username: "",
     password: "",
@@ -16,18 +21,16 @@ const Login = ({ navigation, setIsLoggedIn, setUser }) => {
   const auth = getAuth();
 
   return (
-    <SafeAreaView style={styles.login}>
+    <SafeAreaView style={styles.container}>
       <Header />
       <TextInput
-        placeholder="email"
-        placeholderTextColor="#e2b44e"
+        placeholder="       Type Email...  "
         onChangeText={onChangeEmail}
         text={email}
         style={styles.placeholderText}
       />
       <TextInput
-        placeholder="password"
-        placeholderTextColor="#e2b44e"
+        placeholder="    Type Password...  "
         onChangeText={onChangePassword}
         text={password}
         secureTextEntry={true}
@@ -47,7 +50,7 @@ const Login = ({ navigation, setIsLoggedIn, setUser }) => {
               console.log(user);
               setUser(user);
               setIsLoggedIn(true);
-              console.log(user.uid, 'uid');
+              console.log(user.uid, "uid");
               // ...
             })
             .catch((error) => {
@@ -77,3 +80,31 @@ const Login = ({ navigation, setIsLoggedIn, setUser }) => {
 };
 
 export default Login;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // flexDirection: 'row',
+    backgroundColor: "#080043",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    padding: 20,
+    borderColor: "#FC6C16",
+  },
+  placeholderText: {
+    placeholderTextColor: "#FC6C16",
+    borderRadius: 20,
+    height: 50,
+    width: 150,
+    borderWidth: 2,
+    backgroundColor: "#476B91",
+
+    borderColor: "#00FFA6",
+  },
+});
+
+// white: #F4F7F6
+// yellow: #F0F00F
+// pink: #EC20D8
+// orange: #FC6C16
+// blue: #080043
