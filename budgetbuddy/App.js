@@ -19,6 +19,7 @@ import {
 } from "./utils/api";
 
 import RegisterUserData from "./components/RegisterUserData";
+import FinancialStats from "./components/FinancialStats";
 
 const Stack = createNativeStackNavigator();
 
@@ -82,6 +83,7 @@ export default function App() {
 
               <Stack.Screen name="Personal" component={Personal} />
               <Stack.Screen name="Group" component={Group} />
+              <Stack.Screen name="Financial Stats" component={FinancialStats} />
               <Stack.Screen name="Personal Goals">
                 {(props) => <PersonalGoals {...props} user={user} />}
               </Stack.Screen>

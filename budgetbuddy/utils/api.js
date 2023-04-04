@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const checkIfRegistered = (uid) => {
   return axios.get(`http://localhost:5000/users/${uid}`).then(({ data }) => {
+
     console.log(data.data, "api line 5");
     return data.data;
   });
@@ -17,6 +18,7 @@ const getUserGoals = (user_id) => {
       const userGoals = data.data.userGoals;
       return userGoals;
     });
+
 };
 
 export { getUserGoals };
@@ -61,6 +63,7 @@ export const checkIfRegisteredBudget = (uid) => {
       console.log(data, "api line 45");
       return data;
     });
+
 };
 
 export const postRegisteredBudget = (
@@ -85,6 +88,17 @@ export const postRegisteredBudget = (
         alert(`request failed`);
       }
 
+      console.log(error);
+    });
+};
+
+export const fetchbudgetData = (user_Id) => {
+  return axios
+    .get(`http://192.168.0.49:5000/users/${user_Id}/budget`)
+    .then((response) => {
+      return response.data.budgetData;
+    })
+    .catch((error) => {
       console.log(error);
     });
 };

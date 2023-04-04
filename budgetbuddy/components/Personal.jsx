@@ -17,9 +17,9 @@ const Personal = ({ navigation }) => {
       />
       <Button
         onPress={() => {
-          navigation.navigate('SpendingStats');
+          navigation.navigate('Financial Stats');
         }}
-        title="Spending Stats"
+        title="Financial Stats"
       />
       <Button onPress={() => {
         navigation.navigate('Personal Goals');
