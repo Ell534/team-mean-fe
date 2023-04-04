@@ -13,7 +13,7 @@ import Income from "./components/Income";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [user, setUser] = useState(null);
 
   // console.log(user.uid, '<--user id', user.getToken(), '<-- user token');

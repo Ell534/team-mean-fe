@@ -1,10 +1,11 @@
 import axios from 'axios'
 
-export const getSubCategories = (category) => {
+export const addTransaction = (details) => {
     return axios
-    .get(`http://localhost:5000/expense_categories/${category}`
+    .post(
+        `http://localhost:5000/users/0/transactions`, expense 
     )
-    .then(({data}) => {
-    console.log(data.data.subcategories);
+    .then(data => {
+        console.log(data)
     })
 }

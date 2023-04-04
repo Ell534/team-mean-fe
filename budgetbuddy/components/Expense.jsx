@@ -63,7 +63,7 @@ const Expense = ({navigation}) => {
             text={description}
             style={styles.placeholderText}
             />
-            <DropDownPicker
+             <DropDownPicker
             open={open}
             value={value}
             items={categories}
@@ -89,7 +89,7 @@ const Expense = ({navigation}) => {
             title='Add Expense'
             onPress={() => {
                 setExpenseDetails(
-                    {...expenseDetails, amount, date, categoryId, description, currency_id}
+                    {...expenseDetails, amount, categoryId, description, currency_id}
                 )
                 handleSubmit
             }}
