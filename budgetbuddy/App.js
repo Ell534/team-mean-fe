@@ -12,6 +12,7 @@ import PersonalGoals from './components/PersonalGoals';
 import Expense from './components/Expense';
 import Income from './components/Income';
 import NewPersonalGoal from './components/NewPersonalGoal';
+import { Button } from "react-native";
 import {
   checkIfRegistered,
   checkIfRegisteredBudget,
@@ -19,6 +20,7 @@ import {
 } from './utils/api';
 
 import RegisterUserData from './components/RegisterUserData';
+import FinancialStats from "./components/FinancialStats";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,11 +33,13 @@ export default function App() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      checkIfRegistered(user.uid).then((userData) => {
-        if (userData) {
-          setIsRegistered(true);
-        }
-      });
+      if (!isRegistered) {
+        checkIfRegistered(user.uid).then((userData) => {
+          if (userData) {
+            setIsRegistered(true);
+          }
+        });
+      }
       if (!isRegisteredBudget) {
         checkIfRegisteredBudget(user.uid).then((userData) => {
           if (userData) {
@@ -58,34 +62,35 @@ export default function App() {
 
 
   return (
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: '#080043',
-            },
-            headerTintColor: '#f4f7f6',
-          }}
-        >
-          <Stack.Group>
-            {isLoggedIn ? (
-              <>
-                {isRegistered ? (
-                  <></>
-                ) : (
-                  <Stack.Screen name="RegisterUserData">
-                    {(props) => <RegisterUserData {...props} user={user} />}
-                  </Stack.Screen>
-                )}
-
-                <Stack.Screen name="Home" component={Home} />
-                <Stack.Screen name="Personal" component={Personal} />
-                <Stack.Screen name="Group" component={Group} />
-                <Stack.Screen name="Personal Goals">
-                  {(props) => <PersonalGoals {...props} user={user} />}
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: { backgroundColor: "#00ffa6" },
+          headerTintColor: "#292e64",
+        }}
+      >
+        <Stack.Group>
+          {isLoggedIn ? (
+            <>
+              {isRegistered ? (
+                <></>
+              ) : (
+                <Stack.Screen name="RegisterUserData">
+                  {(props) => <RegisterUserData {...props} user={user} />}
                 </Stack.Screen>
-              </>
-            ) : (
+              )}
+              <Stack.Screen name="Home">
+                {(props) => <Home {...props} setIsLoggedIn={setIsLoggedIn} />}
+              </Stack.Screen>
+
+              <Stack.Screen name="Personal" component={Personal} />
+              <Stack.Screen name="Group" component={Group} />
+              <Stack.Screen name="Financial Stats" component={FinancialStats} />
+              <Stack.Screen name="Personal Goals">
+                {(props) => <PersonalGoals {...props} user={user} />}
+              </Stack.Screen>
+            </>
+          ) :  (
               <>
                 <Stack.Screen name="Login">
                   {(props) => (
@@ -100,22 +105,23 @@ export default function App() {
               </>
             )}
           </Stack.Group>
+          
+        <Stack.Group screenOptions={{ presentation: 'modal' }}>
+          <Stack.Screen name="Expense">
+          {(props) => <Expense {...props} user={user} />}
+          </Stack.Screen>
+          <Stack.Screen name="Income">
+          {(props) => <Income {...props} user={user} />}
+          </Stack.Screen>
+        </Stack.Group>
+      </Stack.Navigator>
+      <StatusBar style="auto" />
+    </NavigationContainer>
 
-          <Stack.Group screenOptions={{ presentation: 'modal' }}>
-            <Stack.Screen name="Expense" component={Expense} />
-            <Stack.Screen name="Income" component={Income} />
-            <Stack.Screen name="New Personal Goal">
-              {(props) => <NewPersonalGoal {...props} user={user} />}
-            </Stack.Screen>
-          </Stack.Group>
-        </Stack.Navigator>
-        <StatusBar style="auto" />
-      </NavigationContainer>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     borderColor: '#EC20D8',
-//   },
-// });
+ {/* const styles = StyleSheet.create({
+  container: {
+    borderColor: '#EC20D8',
+  },
+ }); */}

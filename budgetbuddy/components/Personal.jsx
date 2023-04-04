@@ -21,7 +21,7 @@ const Personal = ({ navigation }) => {
       </Pressable>
       <Pressable
         onPress={() => {
-          navigation.navigate('SpendingStats');
+          navigation.navigate('Financial Stats');
         }}
         style={styles.buttons}
       >

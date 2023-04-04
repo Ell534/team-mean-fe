@@ -1,34 +1,38 @@
-import axios from 'axios';
-import { EllIP } from '../.IP.js';
+import axios from "axios";
 
 export const checkIfRegistered = (uid) => {
-  return axios.get(`${EllIP}/users/${uid}`).then(({ data }) => {
-    console.log(data.data, 'api line 5');
+  return axios.get(`http://localhost:5000/users/${uid}`).then(({ data }) => {
+
+    console.log(data.data, "api line 5");
     return data.data;
   });
 };
 
-// const api = axios.create({ baseURL: '${EllIP}' }); IGNORE
+// const api = axios.create({ baseURL: "localhost:5000" });
+// // IGNORE;
 
-export const getUserGoals = (user_id) => {
-  return axios.get(`${EllIP}/users/${user_id}/goals`).then(({ data }) => {
-    const userGoals = data.data.userGoals;
-    return userGoals;
-  });
+const getUserGoals = (user_id) => {
+  return axios
+    .get(`http://localhost:5000/users/${user_id}/goals`)
+    .then(({ data }) => {
+      const userGoals = data.data.userGoals;
+      return userGoals;
+    });
+
 };
 
 export const postRegisteredUser = ({ user, name, userName, currency }) => {
-  console.log(user.email, 'email');
-  console.log(user.uid, 'uid');
-  console.log(user, 'user');
-  console.log(name, 'name');
-  console.log(userName, 'userName');
-  console.log(currency, 'currency');
+  console.log(user.email, "email");
+  console.log(user.uid, "uid");
+  console.log(user, "user");
+  console.log(name, "name");
+  console.log(userName, "userName");
+  console.log(currency, "currency");
 
   console.log(Object.keys(user));
 
   return axios
-    .post(`${EllIP}/users`, {
+    .post(`http://localhost:5000/users`, {
       user_id: user.uid,
       budget_id: user.uid,
       name: name,
@@ -51,10 +55,13 @@ export const postRegisteredUser = ({ user, name, userName, currency }) => {
 };
 
 export const checkIfRegisteredBudget = (uid) => {
-  return axios.get(`${EllIP}/users/${uid}/budget`).then(({ data }) => {
-    console.log(data, 'api line 45');
-    return data;
-  });
+  return axios
+    .get(`http://localhost:5000/users/${uid}/budget`)
+    .then(({ data }) => {
+      console.log(data, "api line 45");
+      return data;
+    });
+
 };
 
 export const postRegisteredBudget = (
@@ -62,7 +69,7 @@ export const postRegisteredBudget = (
   { income_t_count, expense_t_count, balance, total_income, total_expenses }
 ) => {
   return axios
-    .post(`${EllIP}/users/${uid}/budget`, {
+    .post(`http://localhost:5000/users/${uid}/budget`, {
       income_t_count,
       expense_t_count,
       balance,
@@ -79,6 +86,39 @@ export const postRegisteredBudget = (
         alert(`request failed`);
       }
 
+      console.log(error);
+    });
+};
+
+export const addTransaction = (type, amount, categoryId,description, currency_id, userId) => {
+  console.log(amount, categoryId, description, currency_id, userId)
+  console.log(userId)
+    return axios
+    .post(
+        `http://localhost:5000/users/${userId}/transaction`, {
+          userId,
+        budgetId: userId,
+        categoryId,
+        type,
+        description,
+        amount,
+        date: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        currency_id
+        } 
+    )
+    .then(data => {
+        return data
+    })
+}
+export const fetchbudgetData = (user_Id) => {
+  return axios
+    .get(`http://192.168.0.49:5000/users/${user_Id}/budget`)
+    .then((response) => {
+      return response.data.budgetData;
+    })
+    .catch((error) => {
       console.log(error);
     });
 };
