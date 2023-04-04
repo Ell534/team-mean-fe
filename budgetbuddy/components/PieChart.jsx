@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Pressable } from "react-native";
 import { VictoryPie } from "victory-native";
 
-const PieChart = ({ budgetData, chartData }) => {
+const PieChart = ({ budgetData, chartData, selectedMonth }) => {
   const [pieChartData, setPieChartData] = useState([]);
-
+  
   useEffect(() => {
     const updatedData = getPieChartData();
     setPieChartData(updatedData);
@@ -16,7 +16,8 @@ const PieChart = ({ budgetData, chartData }) => {
       return data;
     }
     if (chartData === "all" || chartData === "income") {
-      budgetData.categoryIncome.March.forEach((item) => {
+      const mapData = budgetData.categoryIncome[selectedMonth]
+      mapData.forEach((item) => {
         const existingItem = data.find((d) => d.x === item.mainCategoryName);
         if (existingItem) {
           existingItem.y += item.amount;
@@ -29,7 +30,8 @@ const PieChart = ({ budgetData, chartData }) => {
       });
     }
     if (chartData === "all" || chartData === "expenses") {
-      budgetData.categorySpends.March.forEach((item) => {
+      const mapData = budgetData.categorySpends[selectedMonth]
+      mapData.forEach((item) => {
         const existingItem = data.find((d) => d.x === item.mainCategoryName);
         if (existingItem) {
           existingItem.y += item.amount;

@@ -6,8 +6,8 @@ import { auth } from "../firebaseConfig";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = ({ navigation, setIsLoggedIn, setUser }) => {
-  const [email, onChangeEmail] = useState('');
-  const [password, onChangePassword] = useState('');
+  const [email, onChangeEmail] = useState('mike@budgetBuddies.com');
+  const [password, onChangePassword] = useState('password');
   const [loginDetails, setLoginDetails] = useState({
     username: "",
     password: "",

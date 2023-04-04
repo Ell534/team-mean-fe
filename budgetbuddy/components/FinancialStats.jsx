@@ -3,18 +3,26 @@ import { StyleSheet, Text, SafeAreaView, Pressable } from "react-native";
 import PieChart from "./PieChart.jsx";
 import React, { useState, useEffect } from "react";
 import { fetchbudgetData } from "../utils/api.js";
+import MonthSelector from './MonthSelector.jsx';
+import monthNames from "../assets/Templates.jsx";
+
 
 const user_id = 1;
 
  const FinancialStats = ({ user, navigation }) => {
   const [budgetData, setBudgetData] = useState({});
   const [chartData, setChartData] = useState("all");
+  const [selectedMonth, setSelectedMonth] = useState(monthNames[new Date().getMonth()]);
+
+const handleMonthChange = (month) => {
+  setSelectedMonth(month);
+};
 
   useEffect(() => {
     fetchbudgetData(user_id).then((response) => {
       setBudgetData(response[0]);
     });
-  }, []);
+  }, [selectedMonth]);
 
   const handleAllPress = () => {
     setChartData("all");
@@ -33,7 +41,7 @@ const user_id = 1;
       <SafeAreaView style={styles.pageContainer}>
         <SafeAreaView style={styles.titleContainer}>
           <Text style={styles.titleTextStyle}>{chartData[0].toUpperCase() + chartData.substring(1)}</Text>
-          <Text style={styles.titleTextStyle}>(Personal)</Text>
+          <MonthSelector onMonthChange={handleMonthChange} />
         </SafeAreaView>
 
         <SafeAreaView style={styles.buttonRow}>
@@ -45,7 +53,7 @@ const user_id = 1;
         <SafeAreaView style={styles.dataPresentationContainer}>
           <Text></Text>
           <SafeAreaView style={styles.container}>
-            <PieChart budgetData={budgetData} chartData={chartData} />
+            <PieChart budgetData={budgetData} chartData={chartData} selectedMonth={selectedMonth} />
           </SafeAreaView>
         </SafeAreaView>
       </SafeAreaView>
@@ -66,14 +74,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   titleContainer: {
-    flex: 1,
+    flex: 2,
     backgroundColor: "00FFA6",
     alignItems: "center",
-    justifyContent: "center",
+    borderTopWidth: 0.8,
+    borderColor: '#FC6C16',
+    justifyContent: "space-around",
   },
   titleTextStyle: {
     alignItems: "center",
     color: "white",
+    fontSize: 30,
   },
   buttonRow: {
     flexDirection: "row",
