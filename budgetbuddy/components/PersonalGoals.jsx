@@ -1,13 +1,13 @@
 import { Text, SafeAreaView, FlatList } from 'react-native';
-import { getUserGoals } from '../utils/api';
+import { getUserGoals } from '../utils';
 import { useState, useEffect } from 'react';
 import { styles } from '../styles';
 
-const PersonalGoals = () => {
+const PersonalGoals = ({ user }) => {
   const [userGoals, setUserGoals] = useState([]);
 
   useEffect(() => {
-    getUserGoals(1).then((goals) => {
+    getUserGoals(user.uid).then((goals) => {
       setUserGoals(goals);
     });
   }, []);
@@ -32,7 +32,7 @@ const PersonalGoals = () => {
                 Deposit Frequency: ${item.item.deposit_frequency},
                 Reason: ${item.item.reason}
                 Target Amount: £${item.item.target_amount}
-                Target Date: ${targetDate}
+                Target Date: ${targetDate}              
                 `}
               </Text>
             </SafeAreaView>
