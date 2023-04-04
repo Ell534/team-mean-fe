@@ -2,10 +2,12 @@ import { Button, SafeAreaView, TextInput } from "react-native"
 import { useState } from "react"
 import { styles } from "../styles"
 import DropDownPicker from 'react-native-dropdown-picker';
-import { addTransaction } from "../api";
+import { addTransaction } from "../utils/api";
 
 
-const Income = ({navigation}) => {
+const Income = ({navigation, user}) => {
+    const type = 'income'
+    const [message, setMessage] = useState(false)
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState(null)
     const [currencyOpen, setCurrencyOpen] = useState(false)
@@ -25,24 +27,29 @@ const Income = ({navigation}) => {
         {label: 'Freelance Work', value: 3},
         {label: 'Bonus', value: 28},
     ]);
-    const [incomeDetails, setIncomeDetails] = useState({
-        userId: 0,
-        budgetId: 0,
-        categoryId: 0,
-        type: 'income',
-        description: '',
-        amount: 0,
-        date: new Date(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        currency_id: 0,
-    })
+    // const [incomeDetails, setIncomeDetails] = useState({
+    //     userId: user.uid,
+    //     budgetId: user.uid,
+    //     categoryId: 0,
+    //     type: 'income',
+    //     description: '',
+    //     amount: 0,
+    //     date: new Date(),
+    //     createdAt: new Date(),
+    //     updatedAt: new Date(),
+    //     currency_id: 0,
+    // })
 
-    const handleSubmit = (event) => {
-        // event.preventDefault()
-        addTransaction(incomeDetails)
+
+    if (message) {
+        return (<SafeAreaView style={styles.login}>
+            <Text style={styles.text}>Your expense has been added!</Text>
+            <Button onPress={() => {
+                navigation.goBack()
+            }} title='Dismiss'/>
+        </SafeAreaView> )
     }
-
+    
     return (
         <SafeAreaView>
             <TextInput 
@@ -60,6 +67,9 @@ const Income = ({navigation}) => {
             style={styles.placeholderText}
             />
             <DropDownPicker
+            containerProps={{
+                height: open === true ? 220 : null,
+              }}
             open={open}
             value={value}
             items={categories}
@@ -71,6 +81,9 @@ const Income = ({navigation}) => {
             }}
             />
             <DropDownPicker 
+            containerProps={{
+                height: open === true ? 220 : null,
+              }}
             open={currencyOpen}
             value={currencyValue}
             items={currencies}
@@ -84,10 +97,10 @@ const Income = ({navigation}) => {
             <Button 
             title='Add Income'
             onPress={() => {
-                setIncomeDetails(
-                    {...incomeDetails, amount, categoryId, description, currency_id}
-                )
-                handleSubmit
+                addTransaction(amount, categoryId,description, currency_id, user.uid)
+                .then((data) => {
+                    setMessage(true)
+                })
             }}
             />
             <Button onPress={() => {

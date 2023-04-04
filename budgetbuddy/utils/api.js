@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { EllIP } from '../.IP.js';
+// import { EllIP } from '../.IP.js';
 
 export const checkIfRegistered = (uid) => {
-  return axios.get(`localhost:5000/users/${uid}`).then(({ data }) => {
+  return axios.get(`http://localhost:5000/users/${uid}`).then(({ data }) => {
     console.log(data.data, 'api line 5');
     return data.data;
   });
@@ -12,7 +12,7 @@ export const checkIfRegistered = (uid) => {
 
 const getUserGoals = (user_id) => {
   return axios
-    .get(`localhost:5000/users/${user_id}/goals`)
+    .get(`http://localhost:5000/users/${user_id}/goals`)
     .then(({ data }) => {
       const userGoals = data.data.userGoals;
       return userGoals;
@@ -32,7 +32,7 @@ export const postRegisteredUser = ({ user, name, userName, currency }) => {
   console.log(Object.keys(user));
 
   return axios
-    .post(`localhost:5000/users`, {
+    .post(`http://localhost:5000/users`, {
       user_id: user.uid,
       budget_id: user.uid,
       name: name,
@@ -56,7 +56,7 @@ export const postRegisteredUser = ({ user, name, userName, currency }) => {
 
 export const checkIfRegisteredBudget = (uid) => {
   return axios
-    .get(`localhost:5000/users/${uid}/budget`)
+    .get(`http://localhost:5000/users/${uid}/budget`)
     .then(({ data }) => {
       console.log(data, 'api line 45');
       return data;
@@ -68,7 +68,7 @@ export const postRegisteredBudget = (
   { income_t_count, expense_t_count, balance, total_income, total_expenses }
 ) => {
   return axios
-    .post(`localhost:5000/users/${uid}/budget`, {
+    .post(`http://localhost:5000/users/${uid}/budget`, {
       income_t_count,
       expense_t_count,
       balance,
@@ -88,3 +88,26 @@ export const postRegisteredBudget = (
       console.log(error);
     });
 };
+
+export const addTransaction = (type, amount, categoryId,description, currency_id, userId) => {
+  console.log(amount, categoryId, description, currency_id, userId)
+  console.log(userId)
+    return axios
+    .post(
+        `http://localhost:5000/users/${userId}/transaction`, {
+          userId,
+        budgetId: userId,
+        categoryId,
+        type,
+        description,
+        amount,
+        date: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        currency_id
+        } 
+    )
+    .then(data => {
+        return data
+    })
+}

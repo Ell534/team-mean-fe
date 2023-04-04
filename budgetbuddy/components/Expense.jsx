@@ -1,12 +1,12 @@
-import { Button, SafeAreaView, TextInput } from "react-native"
+import { Button, SafeAreaView, TextInput, Text } from "react-native"
 import { useState } from "react"
 import { styles } from "../styles";
-import { Text, Button, SafeAreaView, TextInput } from 'react-native';
-import { useState } from 'react';
-import { styles } from '../styles';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { addTransaction } from "../utils/api";
 
-const Expense = ({navigation}) => {
+const Expense = ({navigation, user}) => {
+    const type = 'expense';
+    const [message, setMessage] = useState(false)
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState(null)
     const [currencyOpen, setCurrencyOpen] = useState(false)
@@ -25,29 +25,38 @@ const Expense = ({navigation}) => {
         {label: 'Restaurants', value: 5},
         {label: 'Entertainment', value: 8},
         {label: 'Studying', value: 10},
-        {label: 'Petrol',Value: 13},
-        {label: 'Public Transport',Value: 14},
-        {label: 'Rent',Value: 16},
-        {label: 'Urilities',Value: 17},
-        {label: 'Holiday',Value: 21},
-        {label: 'Clothing',Value: 22}
+        {label: 'Petrol',value: 13},
+        {label: 'Public Transport',value: 14},
+        {label: 'Rent',value: 16},
+        {label: 'Utilities',value: 17},
+        {label: 'Holiday',value: 21},
+        {label: 'Clothing',value: 22}
     ]);
-    const [expenseDetails, setExpenseDetails] = useState({
-        userId: 0,
-        budgetId: 0,
-        categoryId: 0,
-        type: 'expense',
-        description: '',
-        amount: 0,
-        date: new Date(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        currency_id: 0,
-    })
+    // const [expenseDetails, setExpenseDetails] = useState({
+    //     userId: 0,
+    //     budgetId: 0,
+    //     categoryId: 0,
+    //     type: 'expense',
+    //     description: '',
+    //     amount: 0,
+    //     date: new Date(),
+    //     createdAt: new Date(),
+    //     updatedAt: new Date(),
+    //     currency_id: 0,
+    // })
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        addExpense(expenseDetails)
+    // const handleSubmit = (event) => {
+    //     event.preventDefault()
+    //     addExpense(expenseDetails)
+    // }
+
+    if (message) {
+        return (<SafeAreaView style={styles.login}>
+            <Text style={styles.text}>Your expense has been added!</Text>
+            <Button onPress={() => {
+                navigation.goBack()
+            }} title='Dismiss'/>
+        </SafeAreaView> )
     }
 
     return (
@@ -67,6 +76,9 @@ const Expense = ({navigation}) => {
             style={styles.placeholderText}
             />
              <DropDownPicker
+             containerProps={{
+                height: open === true ? 220 : null,
+              }}
             open={open}
             value={value}
             items={categories}
@@ -77,7 +89,10 @@ const Expense = ({navigation}) => {
                 setCategory(value)
             }}
             />
-            <DropDownPicker 
+            <DropDownPicker
+            containerProps={{
+                height: open === true ? 220 : null,
+              }} 
             open={currencyOpen}
             value={currencyValue}
             items={currencies}
@@ -91,10 +106,10 @@ const Expense = ({navigation}) => {
             <Button 
             title='Add Expense'
             onPress={() => {
-                setExpenseDetails(
-                    {...expenseDetails, amount, categoryId, description, currency_id}
-                )
-                handleSubmit
+                addTransaction(type, amount, categoryId,description, currency_id, user.uid)
+                .then((data) => {
+                    setMessage(true)
+                })
             }}
             />
             <Button onPress={() => {

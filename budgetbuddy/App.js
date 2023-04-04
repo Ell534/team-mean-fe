@@ -99,8 +99,12 @@ export default function App() {
         </Stack.Group>
 
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
-          <Stack.Screen name="Expense" component={Expense} />
-          <Stack.Screen name="Income" component={Income} />
+          <Stack.Screen name="Expense">
+          {(props) => <Expense {...props} user={user} />}
+          </Stack.Screen>
+          <Stack.Screen name="Income">
+          {(props) => <Income {...props} user={user} />}
+          </Stack.Screen>
         </Stack.Group>
       </Stack.Navigator>
       <StatusBar style="auto" />
