@@ -1,4 +1,3 @@
-
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -9,9 +8,10 @@ import NewUser from "./components/NewUser";
 import Home from "./components/Home";
 import Personal from "./components/Personal";
 import Group from "./components/Group";
-import PersonalGoals from './components/PersonalGoals';
+import PersonalGoals from "./components/PersonalGoals";
 import Expense from "./components/Expense";
 import Income from "./components/Income";
+import { Button } from "react-native";
 import {
   checkIfRegistered,
   checkIfRegisteredBudget,
@@ -19,6 +19,7 @@ import {
 } from "./utils/api";
 
 import RegisterUserData from "./components/RegisterUserData";
+import FinancialStats from "./components/FinancialStats";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,11 +32,13 @@ export default function App() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      checkIfRegistered(user.uid).then((userData) => {
-        if (userData) {
-          setIsRegistered(true);
-        }
-      });
+      if (!isRegistered) {
+        checkIfRegistered(user.uid).then((userData) => {
+          if (userData) {
+            setIsRegistered(true);
+          }
+        });
+      }
       if (!isRegisteredBudget) {
         checkIfRegisteredBudget(user.uid).then((userData) => {
           if (userData) {
@@ -60,8 +63,8 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerStyle: { backgroundColor: '#00ffa6' },
-          headerTintColor: '#292e64',
+          headerStyle: { backgroundColor: "#00ffa6" },
+          headerTintColor: "#292e64",
         }}
       >
         <Stack.Group>
@@ -74,10 +77,13 @@ export default function App() {
                   {(props) => <RegisterUserData {...props} user={user} />}
                 </Stack.Screen>
               )}
+              <Stack.Screen name="Home">
+                {(props) => <Home {...props} setIsLoggedIn={setIsLoggedIn} />}
+              </Stack.Screen>
 
-              <Stack.Screen name="Home" component={Home} />
               <Stack.Screen name="Personal" component={Personal} />
               <Stack.Screen name="Group" component={Group} />
+              <Stack.Screen name="Financial Stats" component={FinancialStats} />
               <Stack.Screen name="Personal Goals">
                 {(props) => <PersonalGoals {...props} user={user} />}
               </Stack.Screen>
@@ -98,6 +104,7 @@ export default function App() {
           )}
         </Stack.Group>
 
+<<<<<<< HEAD
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen name="Expense">
           {(props) => <Expense {...props} user={user} />}
@@ -105,6 +112,11 @@ export default function App() {
           <Stack.Screen name="Income">
           {(props) => <Income {...props} user={user} />}
           </Stack.Screen>
+=======
+        <Stack.Group screenOptions={{ presentation: "modal" }}>
+          <Stack.Screen name="Expense" component={Expense} />
+          <Stack.Screen name="Income" component={Income} />
+>>>>>>> 713a4e5af83cf1bf2816e12ddb6c7a5139153ba6
         </Stack.Group>
       </Stack.Navigator>
       <StatusBar style="auto" />
