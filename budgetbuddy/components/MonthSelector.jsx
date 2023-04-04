@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 20,
-    color:"#EC20D8",
+    color:"#FC6C16",
 
   },
   monthText: {
