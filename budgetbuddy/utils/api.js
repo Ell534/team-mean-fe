@@ -92,6 +92,28 @@ export const postRegisteredBudget = (
     });
 };
 
+export const addTransaction = (type, amount, categoryId,description, currency_id, userId) => {
+  console.log(amount, categoryId, description, currency_id, userId)
+  console.log(userId)
+    return axios
+    .post(
+        `http://localhost:5000/users/${userId}/transaction`, {
+          userId,
+        budgetId: userId,
+        categoryId,
+        type,
+        description,
+        amount,
+        date: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        currency_id
+        } 
+    )
+    .then(data => {
+        return data
+    })
+}
 export const fetchbudgetData = (user_Id) => {
   return axios
     .get(`http://192.168.0.49:5000/users/${user_Id}/budget`)
