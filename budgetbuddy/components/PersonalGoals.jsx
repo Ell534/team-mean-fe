@@ -1,9 +1,9 @@
-import { Text, SafeAreaView, FlatList } from 'react-native';
-import { getUserGoals } from '../utils';
+import { Text, SafeAreaView, FlatList, Button } from 'react-native';
+import { getUserGoals } from '../utils/api';
 import { useState, useEffect } from 'react';
 import { styles } from '../styles';
 
-const PersonalGoals = ({ user }) => {
+const PersonalGoals = ({ navigation, user }) => {
   const [userGoals, setUserGoals] = useState([]);
 
   useEffect(() => {
@@ -38,6 +38,12 @@ const PersonalGoals = ({ user }) => {
             </SafeAreaView>
           );
         }}
+      />
+      <Button
+        onPress={() => {
+          navigation.navigate('New Personal Goal');
+        }}
+        title="Set New Personal Goal"
       />
     </SafeAreaView>
   );

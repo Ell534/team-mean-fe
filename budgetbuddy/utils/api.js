@@ -2,24 +2,20 @@ import axios from 'axios';
 import { EllIP } from '../.IP.js';
 
 export const checkIfRegistered = (uid) => {
-  return axios.get(`localhost:5000/users/${uid}`).then(({ data }) => {
+  return axios.get(`${EllIP}/users/${uid}`).then(({ data }) => {
     console.log(data.data, 'api line 5');
     return data.data;
   });
 };
 
-// const api = axios.create({ baseURL: 'localhost:5000' }); IGNORE
+// const api = axios.create({ baseURL: '${EllIP}' }); IGNORE
 
-const getUserGoals = (user_id) => {
-  return axios
-    .get(`localhost:5000/users/${user_id}/goals`)
-    .then(({ data }) => {
-      const userGoals = data.data.userGoals;
-      return userGoals;
-    });
+export const getUserGoals = (user_id) => {
+  return axios.get(`${EllIP}/users/${user_id}/goals`).then(({ data }) => {
+    const userGoals = data.data.userGoals;
+    return userGoals;
+  });
 };
-
-export { getUserGoals };
 
 export const postRegisteredUser = ({ user, name, userName, currency }) => {
   console.log(user.email, 'email');
@@ -32,7 +28,7 @@ export const postRegisteredUser = ({ user, name, userName, currency }) => {
   console.log(Object.keys(user));
 
   return axios
-    .post(`localhost:5000/users`, {
+    .post(`${EllIP}/users`, {
       user_id: user.uid,
       budget_id: user.uid,
       name: name,
@@ -55,12 +51,10 @@ export const postRegisteredUser = ({ user, name, userName, currency }) => {
 };
 
 export const checkIfRegisteredBudget = (uid) => {
-  return axios
-    .get(`localhost:5000/users/${uid}/budget`)
-    .then(({ data }) => {
-      console.log(data, 'api line 45');
-      return data;
-    });
+  return axios.get(`${EllIP}/users/${uid}/budget`).then(({ data }) => {
+    console.log(data, 'api line 45');
+    return data;
+  });
 };
 
 export const postRegisteredBudget = (
@@ -68,7 +62,7 @@ export const postRegisteredBudget = (
   { income_t_count, expense_t_count, balance, total_income, total_expenses }
 ) => {
   return axios
-    .post(`localhost:5000/users/${uid}/budget`, {
+    .post(`${EllIP}/users/${uid}/budget`, {
       income_t_count,
       expense_t_count,
       balance,

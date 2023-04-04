@@ -6,8 +6,8 @@ import { auth } from "../firebaseConfig";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = ({ navigation, setIsLoggedIn, setUser }) => {
-  const [email, onChangeEmail] = useState('');
-  const [password, onChangePassword] = useState('');
+  const [email, onChangeEmail] = useState('elliot94b@gmail.com');
+  const [password, onChangePassword] = useState('password');
   const [loginDetails, setLoginDetails] = useState({
     username: "",
     password: "",
@@ -44,25 +44,25 @@ const Login = ({ navigation, setIsLoggedIn, setUser }) => {
             .then((userCredential) => {
               // Signed in
               const user = userCredential.user;
-              console.log(user);
+              // console.log(user);
               setUser(user);
               setIsLoggedIn(true);
-              console.log(user.uid, 'uid');
+              // console.log(user.uid, 'uid');
               // ...
             })
             .catch((error) => {
               const errorCode = error.code;
               const errorMessage = error.message;
-              console.log(
-                email,
-                "email",
-                password,
-                "password",
-                errorCode,
-                "<--error code",
-                errorMessage,
-                "<--message"
-              );
+              // console.log(
+              //   email,
+              //   "email",
+              //   password,
+              //   "password",
+              //   errorCode,
+              //   "<--error code",
+              //   errorMessage,
+              //   "<--message"
+              // );
             });
         }}
       />
