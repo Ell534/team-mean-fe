@@ -1,6 +1,9 @@
 import { Button, SafeAreaView, TextInput } from "react-native"
 import { useState } from "react"
 import { styles } from "../styles";
+import { Text, Button, SafeAreaView, TextInput } from 'react-native';
+import { useState } from 'react';
+import { styles } from '../styles';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 const Expense = ({navigation}) => {

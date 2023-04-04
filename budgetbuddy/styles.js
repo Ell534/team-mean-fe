@@ -21,6 +21,14 @@ const styles = StyleSheet.create({
   },
   placeholderText: {
     color: '#F7B626',
+  },
+  goalsText: {
+    color: '#F7B626'
+  },
+  titleText: {
+    fontSize: 20,
+    color: '#F7B626',
+    textDecorationLine: 'underline'
   }
 });
 

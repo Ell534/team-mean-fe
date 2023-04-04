@@ -1,16 +1,16 @@
-import { Button, Text, TextInput, View, SafeAreaView } from 'react-native';
-import { styles } from '../styles';
-import Header from './Header';
-import { useState } from 'react';
-import { auth } from '../firebaseConfig';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { Button, Text, TextInput, View, SafeAreaView } from "react-native";
+import { styles } from "../styles";
+import Header from "./Header";
+import { useState } from "react";
+import { auth } from "../firebaseConfig";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = ({ navigation, setIsLoggedIn, setUser }) => {
-  const [email, onChangeEmail] = useState('email');
-  const [password, onChangePassword] = useState('password');
+  const [email, onChangeEmail] = useState('');
+  const [password, onChangePassword] = useState('');
   const [loginDetails, setLoginDetails] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
   const auth = getAuth();
@@ -47,7 +47,7 @@ const Login = ({ navigation, setIsLoggedIn, setUser }) => {
               console.log(user);
               setUser(user);
               setIsLoggedIn(true);
-              console.log(user.uid, 'uid', user.getToken(), 'token');
+              console.log(user.uid, 'uid');
               // ...
             })
             .catch((error) => {
@@ -55,13 +55,13 @@ const Login = ({ navigation, setIsLoggedIn, setUser }) => {
               const errorMessage = error.message;
               console.log(
                 email,
-                'email',
+                "email",
                 password,
-                'password',
+                "password",
                 errorCode,
-                '<--error code',
+                "<--error code",
                 errorMessage,
-                '<--message'
+                "<--message"
               );
             });
         }}
@@ -69,7 +69,7 @@ const Login = ({ navigation, setIsLoggedIn, setUser }) => {
       <Button
         title="Sign Up"
         onPress={() => {
-          navigation.navigate('Sign Up');
+          navigation.navigate("Sign Up");
         }}
       />
     </SafeAreaView>
