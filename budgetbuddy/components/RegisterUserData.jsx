@@ -1,8 +1,7 @@
-import { Button, SafeAreaView, TextInput, Alert } from "react-native";
+import { Button, SafeAreaView, TextInput, StyleSheet } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { postRegisteredUser } from "../utils/api";
 import { useState } from "react";
-import { styles } from "../styles";
 
 const RegisterUserData = ({ user, navigation }) => {
   const [name, onChangeName] = useState("");
@@ -17,34 +16,25 @@ const RegisterUserData = ({ user, navigation }) => {
   ]);
 
   const createTwoButtonAlert = () => {
-    alert("please fill all the fields (っ °Д °;)っ", "My Alert Msg", [
-      {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel",
-      },
-      { text: "OK", onPress: () => console.log("OK Pressed") },
-    ]);
-    return;
+    alert("please fill all the fields (っ °Д °;)っ", "My Alert Msg", []);
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <TextInput
-        placeholder="name"
-        placeholderTextColor="#e2b44e"
+        placeholder="       Type Name...  "
         onChangeText={onChangeName}
         text={name}
         style={styles.placeholderText}
       />
       <TextInput
-        placeholder="userName"
-        placeholderTextColor="#e2b44e"
+        placeholder="    Type User Name... "
         onChangeText={onChangeUserName}
         text={userName}
         style={styles.placeholderText}
       />
       <DropDownPicker
+        style={styles.DropDown}
         containerProps={{
           height: open === true ? 220 : null,
         }}
@@ -60,6 +50,7 @@ const RegisterUserData = ({ user, navigation }) => {
       />
       <Button
         title="Submit"
+        style={styles.buttons}
         onPress={() => {
           if (userName && name && currency) {
             postRegisteredUser({
@@ -77,3 +68,35 @@ const RegisterUserData = ({ user, navigation }) => {
   );
 };
 export default RegisterUserData;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // flexDirection: 'row',
+    backgroundColor: "#080043",
+    alignItems: "center",
+    padding: 20,
+    borderTopWidth: 1,
+    borderColor: "#FC6C16",
+  },
+
+  placeholderText: {
+    placeholderTextColor: "#FC6C16",
+    borderRadius: 20,
+    height: 50,
+    width: 150,
+    margin: 20,
+    borderWidth: 2,
+    backgroundColor: "#476B91",
+    borderColor: "#00FFA6",
+  },
+  DropDown: {
+    margin: 20,
+  },
+});
+
+// white: #F4F7F6
+// yellow: #F0F00F
+// pink: #EC20D8
+// orange: #FC6C16
+// blue: #080043
