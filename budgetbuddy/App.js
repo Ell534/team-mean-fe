@@ -90,22 +90,22 @@ export default function App() {
                 {(props) => <PersonalGoals {...props} user={user} />}
               </Stack.Screen>
             </>
-          ) :  (
-              <>
-                <Stack.Screen name="Login">
-                  {(props) => (
-                    <Login
-                      {...props}
-                      setIsLoggedIn={setIsLoggedIn}
-                      setUser={setUser}
-                    />
-                  )}
-                </Stack.Screen>
-                <Stack.Screen name="Sign Up" component={NewUser} />
-              </>
-            )}
-          </Stack.Group>
-          
+          ) : (
+            <>
+              <Stack.Screen name="Login">
+                {(props) => (
+                  <Login
+                    {...props}
+                    setIsLoggedIn={setIsLoggedIn}
+                    setUser={setUser}
+                  />
+                )}
+              </Stack.Screen>
+              <Stack.Screen name="Sign Up" component={NewUser} />
+            </>
+          )}
+        </Stack.Group>
+
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen name="Expense">
           {(props) => <Expense {...props} user={user} />}
