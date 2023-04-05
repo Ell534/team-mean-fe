@@ -12,7 +12,7 @@ import PersonalGoals from './components/PersonalGoals';
 import Expense from './components/Expense';
 import Income from './components/Income';
 import NewPersonalGoal from './components/NewPersonalGoal';
-import { Button } from "react-native";
+import { Button } from 'react-native';
 import {
   checkIfRegistered,
   checkIfRegisteredBudget,
@@ -20,7 +20,7 @@ import {
 } from './utils/api';
 
 import RegisterUserData from './components/RegisterUserData';
-import FinancialStats from "./components/FinancialStats";
+import FinancialStats from './components/FinancialStats';
 
 const Stack = createNativeStackNavigator();
 
@@ -60,13 +60,12 @@ export default function App() {
 
   // console.log(user.uid, '<--user id', user.getToken(), '<-- user token');
 
-
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerStyle: { backgroundColor: "#00ffa6" },
-          headerTintColor: "#292e64",
+          headerStyle: { backgroundColor: '#080043' },
+          headerTintColor: '#f4f7f6',
         }}
       >
         <Stack.Group>
@@ -108,20 +107,21 @@ export default function App() {
 
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen name="Expense">
-          {(props) => <Expense {...props} user={user} />}
+            {(props) => <Expense {...props} user={user} />}
           </Stack.Screen>
           <Stack.Screen name="Income">
-          {(props) => <Income {...props} user={user} />}
+            {(props) => <Income {...props} user={user} />}
           </Stack.Screen>
         </Stack.Group>
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
-
   );
 }
- {/* const styles = StyleSheet.create({
+{
+  /* const styles = StyleSheet.create({
   container: {
     borderColor: '#EC20D8',
   },
- }); */}
+ }); */
+}

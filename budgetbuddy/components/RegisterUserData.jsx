@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
 
   placeholderText: {
-    placeholderTextColor: "#FC6C16",
+    // placeholderTextColor: "#FC6C16",
     borderRadius: 20,
     height: 50,
     width: 150,

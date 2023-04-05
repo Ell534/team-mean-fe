@@ -11,8 +11,8 @@ import { auth } from "../firebaseConfig";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = ({ navigation, setIsLoggedIn, setUser }) => {
-  const [email, onChangeEmail] = useState("");
-  const [password, onChangePassword] = useState("");
+  const [email, onChangeEmail] = useState("elliot94b@gmail.com");
+  const [password, onChangePassword] = useState("password");
   const [loginDetails, setLoginDetails] = useState({
     username: "",
     password: "",
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     borderColor: "#FC6C16",
   },
   placeholderText: {
-    placeholderTextColor: "#FC6C16",
+    // placeholderTextColor: "#FC6C16",
     borderRadius: 20,
     height: 50,
     width: 150,
