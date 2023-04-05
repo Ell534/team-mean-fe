@@ -77,13 +77,13 @@ const styles = StyleSheet.create({
     flex: 2,
     backgroundColor: "00FFA6",
     alignItems: "center",
-    borderTopWidth: 0.8,
+    borderTopWidth: 1,
     borderColor: '#FC6C16',
     justifyContent: "space-around",
   },
   titleTextStyle: {
     alignItems: "center",
-    color: "white",
+    color: "#00FFA6",
     fontSize: 30,
   },
   buttonRow: {
