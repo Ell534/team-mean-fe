@@ -11,13 +11,8 @@ import { auth } from "../firebaseConfig";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = ({ navigation, setIsLoggedIn, setUser }) => {
-<<<<<<< HEAD
-  const [email, onChangeEmail] = useState('mike@budgetBuddies.com');
-  const [password, onChangePassword] = useState('password');
-=======
-  const [email, onChangeEmail] = useState("");
-  const [password, onChangePassword] = useState("");
->>>>>>> fbe75dfedca8d9794558aa543fa83c6715f782f4
+  const [email, onChangeEmail] = useState("elliot94b@gmail.com");
+  const [password, onChangePassword] = useState("password");
   const [loginDetails, setLoginDetails] = useState({
     username: "",
     password: "",
@@ -52,7 +47,7 @@ const Login = ({ navigation, setIsLoggedIn, setUser }) => {
             .then((userCredential) => {
               // Signed in
               const user = userCredential.user;
-              console.log(user);
+              // console.log(user);
               setUser(user);
               setIsLoggedIn(true);
               console.log(user.uid, "uid");
@@ -61,16 +56,16 @@ const Login = ({ navigation, setIsLoggedIn, setUser }) => {
             .catch((error) => {
               const errorCode = error.code;
               const errorMessage = error.message;
-              console.log(
-                email,
-                "email",
-                password,
-                "password",
-                errorCode,
-                "<--error code",
-                errorMessage,
-                "<--message"
-              );
+              // console.log(
+              //   email,
+              //   "email",
+              //   password,
+              //   "password",
+              //   errorCode,
+              //   "<--error code",
+              //   errorMessage,
+              //   "<--message"
+              // );
             });
         }}
       />
@@ -97,7 +92,7 @@ const styles = StyleSheet.create({
     borderColor: "#FC6C16",
   },
   placeholderText: {
-    placeholderTextColor: "#FC6C16",
+    // placeholderTextColor: "#FC6C16",
     borderRadius: 20,
     height: 50,
     width: 150,
