@@ -1,25 +1,26 @@
-import { StatusBar } from "expo-status-bar";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useState } from "react";
-import { useEffect } from "react";
-import Login from "./components/Login";
-import NewUser from "./components/NewUser";
-import Home from "./components/Home";
-import Personal from "./components/Personal";
-import Group from "./components/Group";
-import PersonalGoals from "./components/PersonalGoals";
-import Expense from "./components/Expense";
-import Income from "./components/Income";
-import { Button } from "react-native";
+import { StatusBar } from 'expo-status-bar';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import Login from './components/Login';
+import NewUser from './components/NewUser';
+import Home from './components/Home';
+import Personal from './components/Personal';
+import Group from './components/Group';
+import PersonalGoals from './components/PersonalGoals';
+import Expense from './components/Expense';
+import Income from './components/Income';
+import NewPersonalGoal from './components/NewPersonalGoal';
+import { Button } from 'react-native';
 import {
   checkIfRegistered,
   checkIfRegisteredBudget,
   postRegisteredBudget,
-} from "./utils/api";
+} from './utils/api';
 
-import RegisterUserData from "./components/RegisterUserData";
-import FinancialStats from "./components/FinancialStats";
+import RegisterUserData from './components/RegisterUserData';
+import FinancialStats from './components/FinancialStats';
 
 const Stack = createNativeStackNavigator();
 
@@ -66,8 +67,8 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerStyle: { backgroundColor: "#080043" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: '#080043' },
+          headerTintColor: '#f4f7f6',
         }}
       >
         <Stack.Group>
@@ -120,12 +121,10 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
+{
+  /* const styles = StyleSheet.create({
+  container: {
+    borderColor: '#EC20D8',
+  },
+ }); */
+}

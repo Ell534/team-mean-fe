@@ -7,10 +7,10 @@ export const checkIfRegistered = (uid) => {
   });
 };
 
-// const api = axios.create({ baseURL: "localhost:5000" });
+// const api = axios.create({ baseURL: "${ip}:5000" });
 // // IGNORE;
 
-const getUserGoals = (user_id) => {
+export const getUserGoals = (user_id) => {
   return axios
     .get(`http://${ip}:5000/users/${user_id}/goals`)
     .then(({ data }) => {
@@ -18,8 +18,6 @@ const getUserGoals = (user_id) => {
       return userGoals;
     });
 };
-
-export { getUserGoals };
 
 export const postRegisteredUser = ({ user, name, userName, currency }) => {
   // console.log(user.email, "email");
@@ -119,9 +117,33 @@ export const fetchbudgetData = (user_Id) => {
   return axios
     .get(`http://${ip}:5000/users/${user_Id}/budget`)
     .then((response) => {
+      console.log(response);
       return response.data.budgetData;
     })
     .catch((error) => {
       console.log(error);
     });
+};
+
+export const addPersonalGoal = (
+  userId,
+  targetAmount,
+  targetDate,
+  deposit,
+  depositFrequency,
+  reason
+) => {
+  return axios
+    .post(`http://${ip}:5000/users/${userId}/goal`, {
+      user_id: userId,
+      target_amount: parseInt(targetAmount),
+      target_date: targetDate,
+      deposit: parseInt(deposit),
+      deposit_frequency: depositFrequency,
+      reason,
+    })
+    .then((data) => {
+      return data;
+    })
+    .catch((error) => {});
 };
