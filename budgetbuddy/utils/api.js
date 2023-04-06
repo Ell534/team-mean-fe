@@ -1,9 +1,8 @@
-import axios from 'axios';
-import { ip } from '../.ip';
+import axios from "axios";
+import { ip } from "../.ip.js";
 
 export const checkIfRegistered = (uid) => {
   return axios.get(`http://${ip}:5000/users/${uid}`).then(({ data }) => {
-    console.log(data.data, 'api line 5');
     return data.data;
   });
 };
@@ -21,14 +20,14 @@ export const getUserGoals = (user_id) => {
 };
 
 export const postRegisteredUser = ({ user, name, userName, currency }) => {
-  console.log(user.email, 'email');
-  console.log(user.uid, 'uid');
-  console.log(user, 'user');
-  console.log(name, 'name');
-  console.log(userName, 'userName');
-  console.log(currency, 'currency');
+  // console.log(user.email, "email");
+  // console.log(user.uid, "uid");
+  // console.log(user, "user");
+  // console.log(name, "name");
+  // console.log(userName, "userName");
+  // console.log(currency, "currency");
 
-  console.log(Object.keys(user));
+  // console.log(Object.keys(user));
 
   return axios
     .post(`http://${ip}:5000/users`, {
@@ -40,7 +39,7 @@ export const postRegisteredUser = ({ user, name, userName, currency }) => {
       currency: currency,
     })
     .then((success) => {
-      console.log(success);
+      // console.log(success);
     })
     .catch((error) => {
       if (error.response.status === 404) {
@@ -55,9 +54,10 @@ export const postRegisteredUser = ({ user, name, userName, currency }) => {
 
 export const checkIfRegisteredBudget = (uid) => {
   return axios.get(`http://${ip}:5000/users/${uid}/budget`).then(({ data }) => {
-    console.log(data, 'api line 45');
-    return data;
+    // console.log(data.budgetData, "api line 45");
+    return data.budgetData;
   });
+
 };
 
 export const postRegisteredBudget = (
@@ -73,7 +73,7 @@ export const postRegisteredBudget = (
       total_expenses,
     })
     .then((success) => {
-      console.log(success);
+      // console.log(success);
     })
     .catch((error) => {
       if (error.response.status === 404) {
@@ -94,8 +94,8 @@ export const addTransaction = (
   currency_id,
   userId
 ) => {
-  console.log(amount, categoryId, description, currency_id, userId);
-  console.log(userId);
+  // console.log(amount, categoryId, description, currency_id, userId);
+  // console.log(userId);
   return axios
     .post(`http://${ip}:5000/users/${userId}/transaction`, {
       userId,
@@ -108,10 +108,10 @@ export const addTransaction = (
       createdAt: new Date(),
       updatedAt: new Date(),
       currency_id,
+        })
+    .then(data => {
+        return data
     })
-    .then((data) => {
-      return data;
-    });
 };
 export const fetchbudgetData = (user_Id) => {
   return axios

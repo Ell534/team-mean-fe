@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Pressable } from "react-native";
 import { VictoryPie } from "victory-native";
 
-const PieChart = ({ budgetData, chartData }) => {
-  const [pieChartData, setPieChartData] = useState([]);
 
+const PieChart = ({ budgetData, chartData, selectedMonth }) => {
+  const [pieChartData, setPieChartData] = useState([]);
+  
   useEffect(() => {
     const updatedData = getPieChartData();
     setPieChartData(updatedData);
@@ -16,7 +17,8 @@ const PieChart = ({ budgetData, chartData }) => {
       return data;
     }
     if (chartData === "all" || chartData === "income") {
-      budgetData.categoryIncome.March.forEach((item) => {
+      const mapData = budgetData.categoryIncome[selectedMonth]
+      mapData.forEach((item) => {
         const existingItem = data.find((d) => d.x === item.mainCategoryName);
         if (existingItem) {
           existingItem.y += item.amount;
@@ -29,7 +31,8 @@ const PieChart = ({ budgetData, chartData }) => {
       });
     }
     if (chartData === "all" || chartData === "expenses") {
-      budgetData.categorySpends.March.forEach((item) => {
+      const mapData = budgetData.categorySpends[selectedMonth]
+      mapData.forEach((item) => {
         const existingItem = data.find((d) => d.x === item.mainCategoryName);
         if (existingItem) {
           existingItem.y += item.amount;
@@ -48,16 +51,20 @@ const PieChart = ({ budgetData, chartData }) => {
     <View style={styles.container}>
       <VictoryPie
         data={getPieChartData()}
-        colorScale="qualitative"
-        labelRadius={({ innerRadius }) => innerRadius + 15}
+        colorScale={["#FC6C16","#95C623","#EC20D8", "#7F5A83", "#FF0035", "#8B939C", "#78BC61", "#F0F00F", "#066e24", "#E55812"]}
+        labelRadius={({ innerRadius }) => innerRadius + 6 }
+        labelPosition={ "centroid"}
+        labelPlacement={"parallel"}
         radius={150}
-        innerRadius={70}
+        innerRadius={60}
+        padAngle={1}
         style={{
           labels: {
             fill: "white",
-            fontSize: 14,
+            fontSize: 15,
             fontWeight: "bold",
-            padding: 50,
+            // padding: 50,
+            backgroundColor: '#080043',
           },
         }}
         // height={280}
@@ -81,15 +88,20 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    marginTop: 10,
+    marginTop: 20,
+
   },
-  button: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    marginHorizontal: 5,
-    backgroundColor: "#cccccc",
-    borderRadius: 5,
-  },
+  // button: {
+  //   paddingHorizontal: 10,
+  //   paddingVertical: 5,
+  //   marginHorizontal: 5,
+  //   backgroundColor: '#080043',
+  //   borderRadius: 5,
+  // },
 });
 
 export default PieChart;
+
+// const styles = StyleSheet.create({
+
+// })

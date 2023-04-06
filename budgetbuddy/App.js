@@ -42,9 +42,12 @@ export default function App() {
       }
       if (!isRegisteredBudget) {
         checkIfRegisteredBudget(user.uid).then((userData) => {
-          if (userData) {
+          if (userData.length) {
             setIsRegisteredBudget(true);
+            console.log("detects budget");
           } else {
+            console.log("does not detects budget");
+
             postRegisteredBudget(user.uid, {
               income_t_count: 0,
               expense_t_count: 0,
@@ -105,7 +108,7 @@ export default function App() {
           )}
         </Stack.Group>
 
-        <Stack.Group screenOptions={{ presentation: 'modal' }}>
+        <Stack.Group screenOptions={{ presentation: "modal" }}>
           <Stack.Screen name="Expense">
             {(props) => <Expense {...props} user={user} />}
           </Stack.Screen>
