@@ -28,7 +28,7 @@ const Personal = ({ navigation }) => {
         title="Financial Stats"
         style={styles.buttons}
       >
-        <Text style={styles.buttonText}>Spending Stats</Text>
+        <Text style={styles.buttonText}>Financial Stats</Text>
       </Pressable>
       <Pressable
         onPress={() => {
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     height: 50,
     width: 150,
-    backgroundColor: "#476B91",
+    backgroundColor: "#4b4b83",
   },
   buttonText: {
     color: "#f4f7f6",

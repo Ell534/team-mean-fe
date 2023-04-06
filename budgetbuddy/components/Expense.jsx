@@ -1,9 +1,8 @@
-import { Button, SafeAreaView, TextInput, Text } from "react-native"
+import { Button, SafeAreaView, TextInput, Text, StyleSheet, Pressable } from "react-native"
 import { useState } from "react"
-import { styles } from "../styles";
+// import { styles } from "../styles";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { addTransaction } from "../utils/api";
-
 const Expense = ({navigation, user}) => {
     const type = 'expense';
     const [message, setMessage] = useState(false)
@@ -44,42 +43,47 @@ const Expense = ({navigation, user}) => {
     //     updatedAt: new Date(),
     //     currency_id: 0,
     // })
-
     // const handleSubmit = (event) => {
     //     event.preventDefault()
     //     addExpense(expenseDetails)
     // }
-
     if (message) {
-        return (<SafeAreaView style={styles.login}>
+        return (<SafeAreaView style={styles.container}>
             <Text style={styles.text}>Your expense has been added!</Text>
-            <Button onPress={() => {
-                navigation.goBack()
-            }} title='Dismiss'/>
+            <Pressable onPress={() => {
+                navigation.goBack();
+            }}
+            title="Dismiss"
+            style={styles.buttons}
+            >
+              <Text style={styles.buttonText}>Dismiss</Text>
+            </Pressable>
         </SafeAreaView> )
     }
-
     return (
-        <SafeAreaView>
-            <TextInput 
-            placeholder="Amount"
-            placeholderTextColor='#e2b44e'
+        <SafeAreaView style={styles.container}>
+            <TextInput
+            placeholder="  Amount   "
+            placeholderTextColor='#F4F7F6'
             onChangeText={onChangeAmount}
             text={amount}
-            style={styles.placeholderText}
+            style={styles.textInput}
             inputMode='numeric'
             />
-            <TextInput 
-            placeholder="description"
-            placeholderTextColor='#e2b44e'
+            <TextInput
+            placeholder="Description"
+            placeholderTextColor='#F4F7F6'
             onChangeText={onChangeDescription}
             text={description}
-            style={styles.placeholderText}
+            style={styles.textInput}
             />
+            <SafeAreaView>
              <DropDownPicker
-             containerProps={{
-                height: open === true ? 220 : null,
-              }}
+             dropDownDirection="TOP"
+             style={styles.dropDownStyle}
+            //  containerProps={{
+            //     height: open === true ? 220 : null,
+            //   }}
             open={open}
             value={value}
             items={categories}
@@ -91,9 +95,11 @@ const Expense = ({navigation, user}) => {
             }}
             />
             <DropDownPicker
-            containerProps={{
-                height: open === true ? 220 : null,
-              }} 
+            dropDownDirection="TOP"
+            style={styles.dropDownStyle}
+            // containerProps={{
+            //     height: open === true ? 220 : null,
+            //   }}
             open={currencyOpen}
             value={currencyValue}
             items={currencies}
@@ -104,21 +110,80 @@ const Expense = ({navigation, user}) => {
                 setCurrency(value)
             }}
             />
-            <Button 
-            title='Add Expense'
+            </SafeAreaView>
+            <Pressable
             onPress={() => {
                 addTransaction(type, amount, categoryId,description, currency_id, user.uid)
                 .then((data) => {
                     setMessage(true)
                 })
             }}
-            />
-            <Button onPress={() => {
-                navigation.goBack()
-            }} title='Dismiss'/>
+            title="Add Expense"
+            style={styles.buttons}
+            >
+              <Text style={styles.buttonText}>Add Expense</Text>
+            </Pressable>
+            <Pressable onPress={() => {
+                navigation.goBack();
+            }}
+            title="Dismiss"
+            style={styles.buttons}
+            >
+              <Text style={styles.buttonText}>Dismiss</Text>
+            </Pressable>
         </SafeAreaView>
     )
-    
 }
-
 export default Expense
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      // flexDirection: 'row',
+      backgroundColor: "#080043",
+      alignItems: "center",
+      justifyContent: "space-evenly",
+      padding: 20,
+      borderTopWidth: 1,
+      borderColor: "#FC6C16",
+    },
+    buttons: {
+      flex: 0.1,
+      borderWidth: 1,
+      borderColor: "#00FFA6",
+      justifyContent: "center",
+      alignContent: "center",
+      alignItems: "center",
+      borderRadius: 20,
+      height: 50,
+      width: 150,
+    //   backgroundColor: "#476B91",
+    },
+    buttonText: {
+      color: "white",
+      padding: 10,
+      fontSize: 15,
+      // justifyContent: 'center',
+      // alignContent: 'center'
+    },
+    text: {
+        color: '#F0F00F',
+        fontSize: 20
+    },
+    textInput: {
+        color: '#F4F7F6',
+        borderColor: '#00FFA6',
+        borderWidth: 0.5,
+        borderRadius: 5,
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingLeft: 100,
+        paddingRight: 100,
+        marginBottom: -30
+    },
+    dropDownStyle: {
+        // backgroundColor: '#080043',
+        width: 300,
+        // justifyContent: 'center',
+        marginBottom: 10,
+    }
+  });
