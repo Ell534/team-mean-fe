@@ -1,9 +1,8 @@
 import axios from "axios";
+import { ip } from "../.ip.js";
 
 export const checkIfRegistered = (uid) => {
-  return axios.get(`http://localhost:5000/users/${uid}`).then(({ data }) => {
-
-    console.log(data.data, "api line 5");
+  return axios.get(`http://${ip}:5000/users/${uid}`).then(({ data }) => {
     return data.data;
   });
 };
@@ -13,28 +12,27 @@ export const checkIfRegistered = (uid) => {
 
 const getUserGoals = (user_id) => {
   return axios
-    .get(`http://localhost:5000/users/${user_id}/goals`)
+    .get(`http://${ip}:5000/users/${user_id}/goals`)
     .then(({ data }) => {
       const userGoals = data.data.userGoals;
       return userGoals;
     });
-
 };
 
 export { getUserGoals };
 
 export const postRegisteredUser = ({ user, name, userName, currency }) => {
-  console.log(user.email, "email");
-  console.log(user.uid, "uid");
-  console.log(user, "user");
-  console.log(name, "name");
-  console.log(userName, "userName");
-  console.log(currency, "currency");
+  // console.log(user.email, "email");
+  // console.log(user.uid, "uid");
+  // console.log(user, "user");
+  // console.log(name, "name");
+  // console.log(userName, "userName");
+  // console.log(currency, "currency");
 
-  console.log(Object.keys(user));
+  // console.log(Object.keys(user));
 
   return axios
-    .post(`http://localhost:5000/users`, {
+    .post(`http://${ip}:5000/users`, {
       user_id: user.uid,
       budget_id: user.uid,
       name: name,
@@ -43,7 +41,7 @@ export const postRegisteredUser = ({ user, name, userName, currency }) => {
       currency: currency,
     })
     .then((success) => {
-      console.log(success);
+      // console.log(success);
     })
     .catch((error) => {
       if (error.response.status === 404) {
@@ -57,13 +55,10 @@ export const postRegisteredUser = ({ user, name, userName, currency }) => {
 };
 
 export const checkIfRegisteredBudget = (uid) => {
-  return axios
-    .get(`http://localhost:5000/users/${uid}/budget`)
-    .then(({ data }) => {
-      console.log(data, "api line 45");
-      return data;
-    });
-
+  return axios.get(`http://${ip}:5000/users/${uid}/budget`).then(({ data }) => {
+    // console.log(data.budgetData, "api line 45");
+    return data.budgetData;
+  });
 };
 
 export const postRegisteredBudget = (
@@ -71,7 +66,7 @@ export const postRegisteredBudget = (
   { income_t_count, expense_t_count, balance, total_income, total_expenses }
 ) => {
   return axios
-    .post(`http://localhost:5000/users/${uid}/budget`, {
+    .post(`http://${ip}:5000/users/${uid}/budget`, {
       income_t_count,
       expense_t_count,
       balance,
@@ -79,7 +74,7 @@ export const postRegisteredBudget = (
       total_expenses,
     })
     .then((success) => {
-      console.log(success);
+      // console.log(success);
     })
     .catch((error) => {
       if (error.response.status === 404) {
@@ -92,31 +87,36 @@ export const postRegisteredBudget = (
     });
 };
 
-export const addTransaction = (type, amount, categoryId,description, currency_id, userId) => {
-  console.log(amount, categoryId, description, currency_id, userId)
-  console.log(userId)
-    return axios
-    .post(
-        `http://localhost:5000/users/${userId}/transaction`, {
-          userId,
-        budgetId: userId,
-        categoryId,
-        type,
-        description,
-        amount,
-        date: new Date(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        currency_id
-        } 
-    )
-    .then(data => {
-        return data
+export const addTransaction = (
+  type,
+  amount,
+  categoryId,
+  description,
+  currency_id,
+  userId
+) => {
+  // console.log(amount, categoryId, description, currency_id, userId);
+  // console.log(userId);
+  return axios
+    .post(`http://${ip}:5000/users/${userId}/transaction`, {
+      userId,
+      budgetId: userId,
+      categoryId,
+      type,
+      description,
+      amount,
+      date: new Date(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      currency_id,
     })
-}
+    .then((data) => {
+      return data;
+    });
+};
 export const fetchbudgetData = (user_Id) => {
   return axios
-    .get(`http://192.168.0.49:5000/users/${user_Id}/budget`)
+    .get(`http://${ip}:5000/users/${user_Id}/budget`)
     .then((response) => {
       return response.data.budgetData;
     })
