@@ -5,6 +5,9 @@ import React, { useState, useEffect } from "react";
 import { fetchbudgetData } from "../utils/api.js";
 import MonthSelector from './MonthSelector.jsx';
 import monthNames from "../assets/Templates.jsx";
+import ListItems from "./ListItems.jsx";
+// import ItemForList from "./ItemForList.jsx";
+
 
 
 const user_id = 1;
@@ -51,11 +54,16 @@ const handleMonthChange = (month) => {
         </SafeAreaView>
 
         <SafeAreaView style={styles.dataPresentationContainer}>
-          <Text></Text>
-          <SafeAreaView style={styles.container}>
-            <PieChart budgetData={budgetData} chartData={chartData} selectedMonth={selectedMonth} />
-          </SafeAreaView>
-        </SafeAreaView>
+  <SafeAreaView style={styles.chartContainer}>
+    <PieChart budgetData={budgetData} chartData={chartData} selectedMonth={selectedMonth} />
+  </SafeAreaView>
+  <SafeAreaView style={styles.listContainer}>
+    <ListItems  budgetData={budgetData}
+    chartData={chartData}
+    selectedMonth={selectedMonth}/>
+  </SafeAreaView>
+</SafeAreaView>
+
       </SafeAreaView>
     </SafeAreaView>
   );
@@ -109,15 +117,26 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 30,
     width: 100, 
-    backgroundColor: "#080043",
+    backgroundColor: "#3e5174",
     marginHorizontal: 10,
     alignItems: "center",
     alignContent: "center"
   },
   buttonText: {
     color: "#f4f7f6",
-    textAlign: "center", // center the text inside the button
+    textAlign: "center",
     width: 100,
+  },
+  chartContainer: {
+    flex: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 60,
+  },
+  listContainer: {
+    flex: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

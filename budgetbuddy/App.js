@@ -1,25 +1,26 @@
-import { StatusBar } from "expo-status-bar";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useState } from "react";
-import { useEffect } from "react";
-import Login from "./components/Login";
-import NewUser from "./components/NewUser";
-import Home from "./components/Home";
-import Personal from "./components/Personal";
-import Group from "./components/Group";
-import PersonalGoals from "./components/PersonalGoals";
-import Expense from "./components/Expense";
-import Income from "./components/Income";
-import { Button } from "react-native";
+import { StatusBar } from 'expo-status-bar';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import Login from './components/Login';
+import NewUser from './components/NewUser';
+import Home from './components/Home';
+import Personal from './components/Personal';
+import Group from './components/Group';
+import PersonalGoals from './components/PersonalGoals';
+import Expense from './components/Expense';
+import Income from './components/Income';
+import NewPersonalGoal from './components/NewPersonalGoal';
+import { Button } from 'react-native';
 import {
   checkIfRegistered,
   checkIfRegisteredBudget,
   postRegisteredBudget,
-} from "./utils/api";
+} from './utils/api';
 
-import RegisterUserData from "./components/RegisterUserData";
-import FinancialStats from "./components/FinancialStats";
+import RegisterUserData from './components/RegisterUserData';
+import FinancialStats from './components/FinancialStats';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,9 +42,12 @@ export default function App() {
       }
       if (!isRegisteredBudget) {
         checkIfRegisteredBudget(user.uid).then((userData) => {
-          if (userData) {
+          if (userData.length) {
             setIsRegisteredBudget(true);
+            console.log("detects budget");
           } else {
+            console.log("does not detects budget");
+
             postRegisteredBudget(user.uid, {
               income_t_count: 0,
               expense_t_count: 0,
@@ -63,8 +67,8 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerStyle: { backgroundColor: "#080043" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: '#080043' },
+          headerTintColor: '#f4f7f6',
         }}
       >
         <Stack.Group>
@@ -104,12 +108,12 @@ export default function App() {
           )}
         </Stack.Group>
 
-        <Stack.Group screenOptions={{ presentation: 'modal' }}>
+        <Stack.Group screenOptions={{ presentation: "modal" }}>
           <Stack.Screen name="Expense">
-          {(props) => <Expense {...props} user={user} />}
+            {(props) => <Expense {...props} user={user} />}
           </Stack.Screen>
           <Stack.Screen name="Income">
-          {(props) => <Income {...props} user={user} />}
+            {(props) => <Income {...props} user={user} />}
           </Stack.Screen>
         </Stack.Group>
       </Stack.Navigator>
@@ -117,12 +121,10 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
+{
+  /* const styles = StyleSheet.create({
+  container: {
+    borderColor: '#EC20D8',
+  },
+ }); */
+}

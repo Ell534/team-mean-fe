@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Pressable } from "react-native";
 import { VictoryPie } from "victory-native";
 
+
 const PieChart = ({ budgetData, chartData, selectedMonth }) => {
   const [pieChartData, setPieChartData] = useState([]);
   
@@ -50,7 +51,7 @@ const PieChart = ({ budgetData, chartData, selectedMonth }) => {
     <View style={styles.container}>
       <VictoryPie
         data={getPieChartData()}
-        colorScale={["#7F5A83","#95C623","#EC20D8", "#FC6C16", "#8B939C", "#FF0035", "#78BC61", "#F0F00F", "#066e24", "#E55812"]}
+        colorScale={["#FC6C16","#95C623","#EC20D8", "#7F5A83", "#FF0035", "#8B939C", "#78BC61", "#F0F00F", "#066e24", "#E55812"]}
         labelRadius={({ innerRadius }) => innerRadius + 6 }
         labelPosition={ "centroid"}
         labelPlacement={"parallel"}
@@ -60,7 +61,7 @@ const PieChart = ({ budgetData, chartData, selectedMonth }) => {
         style={{
           labels: {
             fill: "white",
-            fontSize: 17,
+            fontSize: 15,
             fontWeight: "bold",
             // padding: 50,
             backgroundColor: '#080043',
