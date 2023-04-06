@@ -59,6 +59,7 @@ export const checkIfRegisteredBudget = (uid) => {
     // console.log(data.budgetData, "api line 45");
     return data.budgetData;
   });
+
 };
 
 export const postRegisteredBudget = (
@@ -109,10 +110,10 @@ export const addTransaction = (
       createdAt: new Date(),
       updatedAt: new Date(),
       currency_id,
+        })
+    .then(data => {
+        return data
     })
-    .then((data) => {
-      return data;
-    });
 };
 export const fetchbudgetData = (user_Id) => {
   return axios
