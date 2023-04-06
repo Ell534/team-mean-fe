@@ -52,11 +52,7 @@ const Expense = ({navigation, user}) => {
             <Text style={styles.text}>Your expense has been added!</Text>
             <Pressable onPress={() => {
                 navigation.goBack();
-<<<<<<< HEAD
             }} 
-=======
-            }}
->>>>>>> eca3f738858dbfd0cdcecdc143ae3225d8778dc9
             title="Dismiss"
             style={styles.buttons}
             >
@@ -66,11 +62,7 @@ const Expense = ({navigation, user}) => {
     }
     return (
         <SafeAreaView style={styles.container}>
-<<<<<<< HEAD
             <TextInput 
-=======
-            <TextInput
->>>>>>> eca3f738858dbfd0cdcecdc143ae3225d8778dc9
             placeholder="  Amount   "
             placeholderTextColor='#F4F7F6'
             onChangeText={onChangeAmount}
@@ -78,11 +70,7 @@ const Expense = ({navigation, user}) => {
             style={styles.textInput}
             inputMode='numeric'
             />
-<<<<<<< HEAD
             <TextInput 
-=======
-            <TextInput
->>>>>>> eca3f738858dbfd0cdcecdc143ae3225d8778dc9
             placeholder="Description"
             placeholderTextColor='#F4F7F6'
             onChangeText={onChangeDescription}
@@ -90,10 +78,6 @@ const Expense = ({navigation, user}) => {
             style={styles.textInput}
             />
             <SafeAreaView>
-<<<<<<< HEAD
-
-=======
->>>>>>> eca3f738858dbfd0cdcecdc143ae3225d8778dc9
              <DropDownPicker
              dropDownDirection="TOP"
              style={styles.dropDownStyle}
@@ -115,11 +99,7 @@ const Expense = ({navigation, user}) => {
             style={styles.dropDownStyle}
             // containerProps={{
             //     height: open === true ? 220 : null,
-<<<<<<< HEAD
             //   }} 
-=======
-            //   }}
->>>>>>> eca3f738858dbfd0cdcecdc143ae3225d8778dc9
             open={currencyOpen}
             value={currencyValue}
             items={currencies}
@@ -131,11 +111,7 @@ const Expense = ({navigation, user}) => {
             }}
             />
             </SafeAreaView>
-<<<<<<< HEAD
             <Pressable 
-=======
-            <Pressable
->>>>>>> eca3f738858dbfd0cdcecdc143ae3225d8778dc9
             onPress={() => {
                 addTransaction(type, amount, categoryId,description, currency_id, user.uid)
                 .then((data) => {
@@ -149,11 +125,7 @@ const Expense = ({navigation, user}) => {
             </Pressable>
             <Pressable onPress={() => {
                 navigation.goBack();
-<<<<<<< HEAD
             }} 
-=======
-            }}
->>>>>>> eca3f738858dbfd0cdcecdc143ae3225d8778dc9
             title="Dismiss"
             style={styles.buttons}
             >
@@ -162,13 +134,9 @@ const Expense = ({navigation, user}) => {
         </SafeAreaView>
     )
 }
-<<<<<<< HEAD
 
 export default Expense
 
-=======
-export default Expense
->>>>>>> eca3f738858dbfd0cdcecdc143ae3225d8778dc9
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -193,22 +161,14 @@ const styles = StyleSheet.create({
     //   backgroundColor: "#476B91",
     },
     buttonText: {
-<<<<<<< HEAD
       color: "#FC6C16",
-=======
-      color: "white",
->>>>>>> eca3f738858dbfd0cdcecdc143ae3225d8778dc9
       padding: 10,
       fontSize: 15,
       // justifyContent: 'center',
       // alignContent: 'center'
     },
     text: {
-<<<<<<< HEAD
         color: '#f0f00f',
-=======
-        color: '#F0F00F',
->>>>>>> eca3f738858dbfd0cdcecdc143ae3225d8778dc9
         fontSize: 20
     },
     textInput: {
@@ -227,11 +187,6 @@ const styles = StyleSheet.create({
         width: 300,
         // justifyContent: 'center',
         marginBottom: 10,
-<<<<<<< HEAD
 
     }
   });
-=======
-    }
-  });
->>>>>>> eca3f738858dbfd0cdcecdc143ae3225d8778dc9
